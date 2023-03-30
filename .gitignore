@@ -6,3 +6,5 @@ first_test.bin
 first_test.elf
 
 startup.o
+.gdb_history
+.gitignore
