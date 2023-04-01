@@ -3,13 +3,16 @@ LD=arm-none-eabi-ld
 AS=arm-none-eabi-as
 OBCPY=arm-none-eabi-objcopy
 VM=qemu-system-arm
-VMFLGS= -M realview-pb-a8 -m 32M -no-reboot -nographic -monitor telnet:127.0.0.1:12345,server,nowait
+#BOARD=mcimx6ul-evk
+BOARD=realview-pb-a8
+VMFLGS= -M $(BOARD)  -no-reboot -nographic -monitor telnet:127.0.0.1:12345,server,nowait
 STARTF=startup
 BINF=first_test
 
+
 all:
 	$(AS) -g -o $(STARTF).o $(STARTF).s
-	$(LD) -o $(BINF).elf $(STARTF).o
+	$(LD) -T mmap.ld -o $(BINF).elf $(STARTF).o
 	$(OBCPY) -O binary $(BINF).elf $(BINF).bin
 run:
 	$(VM) $(VMFLGS) -kernel $(BINF).bin
