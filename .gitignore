@@ -8,3 +8,4 @@ first_test.elf
 startup.o
 .gdb_history
 .gitignore
+.vscode
