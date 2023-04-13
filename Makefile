@@ -28,7 +28,8 @@ STARTF=startup
 BINF=first_test
 
 #linker script
-LS=mmap.ld
+#LS=mmap.ld
+LS=void.ld
 
 all:
 	$(AS) -g -o $(STARTF).o $(STARTF).s
