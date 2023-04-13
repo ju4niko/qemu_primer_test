@@ -27,9 +27,8 @@ STARTF=startup
 #imagen binaria
 BINF=first_test
 
-#linker script, seleccionar el que se vaya a usar void.ld esta vacio para no usar un linker script
-#LS=mmap.ld
-LS=void.ld
+#linker script
+LS=mmap.ld
 
 all:
 	$(AS) -g -o $(STARTF).o $(STARTF).s
@@ -37,5 +36,11 @@ all:
 	$(OC) -O binary $(BINF).elf $(BINF).bin
 run:
 	$(VM) $(VMFLGS) -kernel $(BINF).bin
+debug:
+	$(VM) $(VMFLGS) -s -S -kernel $(BINF).bin
 clean:
 	rm *.bin *.o *.elf
+edit:
+	nano $(STARTF).s
+connect:
+	telnet localhost 12345
