@@ -4,7 +4,7 @@
 _start:
 	LDR 	r2, str1
 	MRC 	p15, 0, r1, c0, c0, 0	//leo el SCTLR (System Control Register).
-	MRC 	p15, 0, r4, c12, c0, 0 	//leo valor del VTOR
+	MRC 	p15, 0, r4, c12, c0, 0 	//leo valor del VTOR (tabla de vectores int)
 	b 	reset
 
 str1: 	.word 0xAA55AA55
@@ -20,7 +20,7 @@ reset:
 	//bic r0, r0, #0x800
 
 	// Escribir el valor de reinicio en el registro RCR
-	mov r1, #0 	// <---- este valor es para uso del programador, 
+	mov r1, #0 		// <---- este valor es para uso del programador, 
 				// suele usarse para indicar el motivo del reset
 				// #0 suele ser OK
 	mcr p15, 0, r1, c0, c0, 0
